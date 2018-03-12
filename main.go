@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/PuerkitoBio/goquery"
+  . "./twittercredentials"
 )
 
 func main() {
@@ -14,4 +15,12 @@ func main() {
 
 	result, _ := doc.Find("svg g g").Last().Find("rect").Last().Attr("fill")
 	fmt.Println(result)
+
+	api := TwitterCredentials()
+	tweet, err := api.PostTweet("Test", nil)
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	fmt.Println(tweet.Text)
 }
