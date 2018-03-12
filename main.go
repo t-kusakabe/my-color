@@ -1,24 +1,17 @@
 package main
 
 import (
-	"code.google.com/p/go.net/html"
-  "fmt"
-  "io"
+	"fmt"
+	"github.com/PuerkitoBio/goquery"
 )
 
-func Scraping(url string) []Result {
-  res, err := http.Get(url)
-  if err != nil {
-    fmt.Println(err)
-  }
-
-  defer res.BodyClose()
-  results := ParseItem(res.Body)
-
-  return results
-}
-
 func main() {
-  url := "https://github.com/users/t-kusakabe/contributions"
-  dom := Scraping(url)
+	doc, err := goquery.NewDocument("https://github.com/users/t-kusakabe/contributions")
+
+	if err != nil {
+		fmt.Println("Can not URL.")
+	}
+
+	result, _ := doc.Find("svg g g").Last().Find("rect").Last().Attr("fill")
+	fmt.Println(result)
 }
