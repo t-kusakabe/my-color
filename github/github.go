@@ -6,7 +6,7 @@ import (
 )
 
 func ScrapingGrass() string {
-	doc, err := goquery.NewDocument("https://github.com/users/t-kusakabe/contributions")
+	doc, err := goquery.NewDocument("Input my github url.")
 	if err != nil {
 		fmt.Println("Can not URL.")
 	}
